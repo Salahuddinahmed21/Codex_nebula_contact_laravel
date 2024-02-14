@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('client_query', function (Blueprint $table) {
+        Schema::create('query_info', function (Blueprint $table) {
             $table->id();
             $table->integer('client_id')->index('client_id');
-            $table->string('features');
-            $table->string('sub_features');
-            $table->string('referencewebsite');
-            $table->string('Description');
+            $table->string('formData');
             $table->string('tpintegration')->nullable();
-            $table->string('referimage')->nullable();
             $table->string('technology');
             $table->string('sdate');
             $table->string('edate');
@@ -35,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_client_query');
+        Schema::dropIfExists('query_info');
     }
 };

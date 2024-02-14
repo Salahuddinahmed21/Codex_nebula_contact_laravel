@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +19,9 @@ use App\Http\Controllers\AdminController;
 Route::get('/', [ClientController::class, 'index']);
 Route::post('ClientStore', [ClientController::class, 'store'])->name('ClientStores');
 Route::Get('ClientDetailView', [ClientController::class, 'ClientDetails'])->name('ClientDetailViews');
-Route::post('ClientDetailStore', [ClientController::class, 'CDStore'])->name('ClientDetailStore');
+Route::post('ClientDetailStore', [UserController::class, 'store'])->name('ClientDetailStore');
+Route::post('featurestore', [UserController::class, 'feature']);
+
 
 //admin_section
 Route::group(['middleware' => 'admin_auth'], function () {

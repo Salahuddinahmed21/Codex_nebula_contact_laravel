@@ -1,6 +1,9 @@
 var myModal;
 var formDataList = [];
 var imageList = [];
+var sdate;
+var ldate;
+var tpinput;
 
 var display;
 var modal2;
@@ -47,7 +50,7 @@ function formCreation() {
 
     // Create input elements and append them to the form group
     let placeholders = ['Features', 'Sub Features', 'Reference Website', 'Description'];
-   
+    let data = [];
     for (let i = 1; i <= 4; i++) {
         // Create a div element to contain the label and input
         let containerDiv = document.createElement('div');
@@ -67,10 +70,11 @@ function formCreation() {
         // Append the label and input to the container div
         containerDiv.appendChild(label);
         containerDiv.appendChild(input);
-    
+        // containerDiv.appendChild(data);
         // Append the container div to the form group
         formGroup.appendChild(containerDiv);
-    
+        data.push(label,input);
+
         // Add a line break between each pair
         formGroup.appendChild(document.createElement('br'));
     }
@@ -87,7 +91,7 @@ function formCreation() {
     fileInput.id = 'fileInput';
     fileInput.name = 'fileInput';
     fileInput.setAttribute('multiple', 'multiple');
-
+    console.log(getFormData());
     // Add an event listener to trigger image display on file selection
     fileInput.addEventListener('change', function() {
         getFormData();
@@ -97,13 +101,15 @@ function formCreation() {
     imgDiv.appendChild(labels);
     imgDiv.appendChild(fileInput);
     formGroup.append(imgDiv);
+
     // Append the form group to the formDiv
     formDiv.appendChild(formGroup);
-
+    
     formGroup.appendChild(document.createElement('br'));
 
     // Update the formDataList after adding a new form
     getFormData();
+
 }
 
 // function previewImages() {
@@ -159,6 +165,7 @@ function addForm() {
         formCreation();
         // Log the list of form data to the console
         console.log(formDataList);
+
     } else {
         alert("Please fill in all the fields before adding a new form.");
     }
@@ -288,22 +295,27 @@ function displayImages() {
 
   }
 
-
+ 
   function submitData() {
     if (validateFields() && validateRadioButtons()) {
         let technology = getSelectedRadioButton();
         let stData = JSON.parse(localStorage.getItem('data'));
+        var inp =document.getElementById('thirdPartyInput').value;
         getFormData();
+
+        //;
         let data = {
-            
             technology: technology,
             formDataList: formDataList,
-            imglist:imageList
+            imglist:imageList,
+            thirdparty:inp,
+            startdate:sdate,
+            enddate:ldate
         };
-        console.log(data);
-    
-
-    
+        var jsonString = JSON.stringify(formDataList);
+           
+        document.getElementById("test").value = jsonString
+        // In your form submission function, retrieve the formDataList from sessionStorage
     } else {
         alert("Please fill in all the fields before adding a new form.");
     }
@@ -326,6 +338,7 @@ document.addEventListener('DOMContentLoaded', function () {
       altFormat: "F j, Y",
       theme: "light",
       onChange: function(selectedDates, dateStr, instance) {
+         sdate=dateStr;
         console.log("Start Date Selected:", dateStr);
       },
     });
@@ -339,6 +352,7 @@ document.addEventListener('DOMContentLoaded', function () {
       theme: "light",
       onChange: function(selectedDates, dateStr, instance) {
         console.log("End Date Selected:", dateStr);
+        ldate=dateStr;
       },
     });
   });

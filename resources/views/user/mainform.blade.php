@@ -5,6 +5,7 @@
     <script src="{{asset('https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.js')}}"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <link rel="stylesheet" href="{{asset('user/CSS/index.css')}}">
    <!-- navbar -->
@@ -21,10 +22,11 @@
    
     <section class="main_page p-3 pl-0 pr-0">
         <div class="container-fluid">
-        <form method="POST" action="{{route('ClientDetailStore')}}" enctype="multipart/form-data">
-                @csrf
+        <form id="myform" method="POST" action="{{route('ClientDetailStore')}}" enctype="multipart/form-data">
+          @csrf
           <div class="row">
-          
+            <input type="hidden" id="test" name="formDataListName" value="forList">
+            <input type="hidden" id="images" name="image" value="forList">
             <div class="col-md-10" >
               <div class="card p-2" style="background-color: #1D1A20;border-color: #7242D2;">
                 <h1 style="color: #fff; font-size: 40px;">Pictures</h1>
@@ -48,7 +50,7 @@
                       <h1 style="color: #fff; font-size: 40px;">Features</h1>
                       <div class="dynamicForm" style="background-color: #1D1A20">
                             <div id="imageDiv" class="card"></div>
-                            <div id="formDiv" class="card">
+                            <div id="formDiv" class="card" >
                                 
                             </div>
                             <br>

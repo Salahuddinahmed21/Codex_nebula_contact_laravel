@@ -20,12 +20,13 @@ class ClientController extends Controller
     }
     public function ClientDetails()
     {  
-               return view('user.mainform');
+        return view('user.mainform');
     }
     public function CDStore(Request $request)
     {  
       
        dd($request);
+       return response()->json(['message' => 'Data saved successfully'], 200);
     }
 
 }
